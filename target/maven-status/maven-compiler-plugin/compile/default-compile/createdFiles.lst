@@ -1,2 +1,3 @@
-calculator\MainController.class
+calculator\Model.class
+calculator\Controller.class
 calculator\Main.class

@@ -1,0 +1,54 @@
+.window{
+	-fx-background-color:  linear-gradient(to top,#d9e4f1, #f1f8ff);
+}
+
+.result{
+	-fx-background-color:   linear-gradient(to bottom,#e4eefa,transparent);
+	-fx-border-color: grey;
+}
+
+.digit_b{
+	-fx-background-color: linear-gradient(to top,#a3beda, #efefef);
+	-fx-border-color: grey;
+	-fx-border-radius: 4;
+}
+
+.digit_b:hover{
+	-fx-background-color: linear-gradient(to top,#86a5c4, #efefef);
+	-fx-border-width: 2;
+	-fx-border-color: orange;
+	-fx-border-radius: 4;
+	-fx-font-size: 15px;
+}
+
+.digit_b:pressed{
+	-fx-background-color: linear-gradient(to top,#ffb200, #efefef);
+	-fx-border-width: 2;
+	-fx-border-color: #48a1ea;
+	-fx-border-radius: 4;
+	-fx-font-size: 15px;
+	-fx-rotate: 10;
+}
+
+.other_b{
+	-fx-background-color: linear-gradient(to top,#3d84cc, #efefef);
+	-fx-border-color: grey;
+	-fx-border-radius: 4;
+}
+
+.other_b:hover{
+	-fx-background-color: linear-gradient(to top,#93c4e4, #efefef);
+	-fx-border-width: 2;
+	-fx-border-color: orange;
+	-fx-border-radius: 4;
+	-fx-font-size: 13px;
+}
+
+.other_b:pressed{
+	-fx-background-color: linear-gradient(to top,#ffb200, #efefef);
+	-fx-border-width: 2;
+	-fx-border-color: #48a1ea;
+	-fx-border-radius: 4;
+	-fx-font-size: 13px;
+	-fx-rotate: 10;
+}

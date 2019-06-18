@@ -5,13 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class MainController {
+public class Controller {
 
-	private Double score = null;
+	private static Double score = null;
 	private Double element1 = null;
 	private Double element2 = null;
 	private String lastClick = "";
 	private String operation = "";
+	private Model model = new Model();
 
 	@FXML
 	private Label labelScore;
@@ -79,20 +80,20 @@ public class MainController {
 		else if (operation.equals("") || lastClick.equals("equel")) {
 			operation = b.getText();
 			element1 = Double.parseDouble(labelScore.getText());
-			labelPattern.setText(integerIfPossible(element1.toString()) + " " + operation + " ");
+			labelPattern.setText(model.integerIfPossible(element1.toString()) + " " + operation + " ");
 		}
 		else if (score == null) {
 			element2 = Double.parseDouble(labelScore.getText());
-			calculate(element2);
+			labelScore.setText(model.calculate(element1, element2, operation));
 			operation = b.getText();
-			labelPattern.setText(labelPattern.getText() + integerIfPossible(element2.toString()) + " " + operation + " ");
+			labelPattern.setText(labelPattern.getText() + model.integerIfPossible(element2.toString()) + " " + operation + " ");
 		}
 		else {
 			element1 = score;
 			element2 = Double.parseDouble(labelScore.getText());
-			calculate(element2);
+			labelScore.setText(model.calculate(element1, element2, operation));
 			operation = b.getText();
-			labelPattern.setText(labelPattern.getText() + integerIfPossible(element2.toString()) + " " + operation + " ");
+			labelPattern.setText(labelPattern.getText() + model.integerIfPossible(element2.toString()) + " " + operation + " ");
 		}
 
 		System.out.println("operacja");
@@ -110,19 +111,19 @@ public class MainController {
 		}
 		else if ((lastClick.equals("digit") || lastClick.equals("dot") || lastClick.equals("negative")) && score == null) {
 			element2 = Double.parseDouble(labelScore.getText());
-			calculate(element2);
+			labelScore.setText(model.calculate(element1, element2, operation));
 			labelPattern.setText("");
 		}
 		else if (lastClick.equals("digit") || lastClick.equals("dot") || lastClick.equals("negative")) {
 			element1 = score;
 			element2 = Double.parseDouble(labelScore.getText());
-			calculate(element2);
+			labelScore.setText(model.calculate(element1, element2, operation));
 			labelPattern.setText("");
 		}
 
 		else if (lastClick.equals("equel")) {
 			element1 = score;
-			calculate(element2);
+			labelScore.setText(model.calculate(element1, element2, operation));
 			labelPattern.setText("");
 		}
 
@@ -152,44 +153,15 @@ public class MainController {
 		}
 
 		Double negative = Double.parseDouble(labelScore.getText()) * -1;
-		labelScore.setText(integerIfPossible(negative.toString()));
+		labelScore.setText(model.integerIfPossible((negative.toString())));
 		lastClick = "negative";
 		System.out.println("negative");
 		System.out.println("e1 =" + element1);
 		System.out.println("e2 =" + element2);
 	}
 
-	// Makes all calculations
-	public void calculate(Double element2) {
-
-		if (operation.equals("+")) {
-			score = element1 + element2;
-			labelScore.setText(integerIfPossible(score.toString()));
-		} else if (operation.equals("-")) {
-			score = element1 - element2;
-			labelScore.setText(integerIfPossible(score.toString()));
-		} else if (operation.equals("*")) {
-			score = element1 * element2;
-			labelScore.setText(integerIfPossible(score.toString()));
-		} else if (operation.equals("/") && element2 != 0) {
-			score = element1 / element2;
-			labelScore.setText(integerIfPossible(score.toString()));
-		} else if (operation.equals("/") && element2 == 0) {
-			labelScore.setText("Nie dzielimy przez 0");
-		}
-
-		System.out.println(score);
-	}
-
-	// Checks if number is integer or double to set proper form on label
-	public String integerIfPossible(String s){
-		Double number = Double.parseDouble(s);
-		if(number%1 == 0){
-			return number.toString().substring(0, number.toString().length() - 2);
-		}
-		else{
-			return number.toString();
-		}
+	public static void setScore(Double score) {
+		Controller.score = score;
 	}
 
 }
